@@ -76,3 +76,23 @@ standby 100 priority 110
 standby 100 preempt
 end
 ```
+
+## Vérification
+Dans la sortie de commande suivante, le routeur actif est R2 (conformément à la priorité donnée dans la configuration des interfaces).
+```
+R1#show standby fastEthernet 0/0
+FastEthernet0/0 - Group 100
+State is Standby
+4 state changes, last state change 00:00:51
+Virtual IP address is 192.168.0.1
+Active virtual MAC address is 0000.0c07.ac64
+Local virtual MAC address is 0000.0c07.ac64 (default)
+Hello time 3 sec, hold time 10 sec
+Next hello sent in 2.712 secs
+Preemption enabled
+Active router is 192.168.0.2, priority 110 (expires in 9.696 sec)
+Standby router is local
+Priority 100 (default 100)
+IP redundancy name is "hsrp-Fa0/0-100" (default)
+R1#
+```
