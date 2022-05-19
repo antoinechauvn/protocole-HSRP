@@ -21,7 +21,7 @@ Si nos routeurs en mode Passive ne reçoivent plus de paquets “Hello”, ils c
 
 <br>Cet intervalle de temps s’appelle :<br>
 
-“Hold-time Timer” (par défaut: 10 secondes soit 3x le Hello Timer)
+`Hold-time Timer` (par défaut: 10 secondes soit 3x le Hello Timer)
 <br>Les valeurs “Hello Timer” et “Hold-time Timer” peuvent être changées administrativement.
 
 * Si notre routeur en mode Active n’est plus en état de fonctionner, une nouvelle élection à lieu.<br>
