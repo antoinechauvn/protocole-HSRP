@@ -110,4 +110,3 @@ routeur actif de plus grande priorité, le statut du routeur change en « Speak 
 surveiller le processus HSRP, en vue de modifier la priorité HSRP pour un groupe donné. Si le
 protocole de ligne de l'interface spécifiée échoue, la priorité HSRP est réduite. Ainsi, un autre
 routeur HSRP de priorité plus élevée peut devenir le routeur actif si standby preempt est activé.
-```
