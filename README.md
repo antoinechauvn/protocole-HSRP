@@ -10,28 +10,24 @@ HSRP, Host Standby Router Protocol est un protocole de redondance du premier sau
 La technologie HSRP permettra aux routeurs situés dans un même groupe (que l’on nomme « standby group ») de former un routeur virtuel qui sera l’unique passerelle des hôtes du réseau local.
 
 # Election des routeurs HSRP
-* Le routeur qui aura la plus haute priorité (ou « priority ») sera le routeur primaire ou principal du groupe HSRP.
-* Si égalité (100 par défaut), c’est le routeur qui aura l’IP la plus haute qui sera désigné comme routeur primaire.
+1. Le routeur qui aura la plus haute priorité (ou « priority ») sera le routeur primaire ou principal du groupe HSRP.
+    * Si égalité (100 par défaut), c’est le routeur qui aura l’IP la plus haute qui sera désigné comme routeur primaire.
 
-Le ou les routeurs en mode Passive se tiendront informés de l’état de santé du routeur Active via des paquets “Hello” envoyés en mulitcast.
+2. Le ou les routeurs en mode Passive se tiendront informés de l’état de santé du routeur Active via des paquets “Hello” envoyés en mulitcast.
 
-
-* Le routeur en mode `Active` envoi des paquets “Hello” aux routeurs en mode Passive.
-
-Cet intervalle de temps s’appelle :
-
-“Hello Timer” (par défaut: toutes les 3 secondes)
+3. Le routeur en mode `Active` envoi des paquets `Hello` aux routeurs en mode Passive.<br>Cet intervalle de temps s’appelle :
+`Hello Timer` (par défaut: toutes les 3 secondes)<br>
 Si nos routeurs en mode Passive ne reçoivent plus de paquets “Hello”, ils considèrent que le routeur en mode Active est hors service, il va donc y avoir une nouvelle élection !
 
-Cet intervalle de temps s’appelle :
+<br>Cet intervalle de temps s’appelle :<br>
 
 “Hold-time Timer” (par défaut: 10 secondes soit 3x le Hello Timer)
-Les valeurs “Hello Timer” et “Hold-time Timer” peuvent être changées administrativement.
+<br>Les valeurs “Hello Timer” et “Hold-time Timer” peuvent être changées administrativement.
 
-Si notre routeur en mode Active n’est plus en état de fonctionner, une nouvelle élection à lieu.
+* Si notre routeur en mode Active n’est plus en état de fonctionner, une nouvelle élection à lieu.<br>
 Un routeur en mode Passive va donc passer en mode Active.
 
-La commande “preempt” va permettre à un routeur possédant une priorité supérieure aux autres de remplacer le routeur actuellement en mode Active (sans attendre la prochaine élection, #CoupD’état)
+* La commande `preempt` va permettre à un routeur possédant une priorité supérieure aux autres de remplacer le routeur actuellement en mode Active (sans attendre la prochaine élection)
 
 ### Configuration de R1
 ```
