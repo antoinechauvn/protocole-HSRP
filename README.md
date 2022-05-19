@@ -7,7 +7,9 @@ HSRP, Host Standby Router Protocol est un protocole de redondance du premier sau
 
 ![image](https://user-images.githubusercontent.com/83721477/168839422-d194d263-ac80-45b6-ac99-1b6e8ac34a3b.png)
 
-La technologie HSRP permettra aux routeurs situés dans un même groupe (que l’on nomme `standby group`) de former un routeur virtuel qui sera l’unique passerelle des hôtes du réseau local.
+La technologie HSRP permettra aux routeurs situés dans un même groupe (que l’on nomme `standby group`) de former un routeur virtuel qui sera l’unique passerelle des hôtes du réseau local.<br>
+
+*Note: Un routeur peut faire partie de plusieurs groupes HSRP*
 
 # Principe de Fonctionnement
 
@@ -125,10 +127,6 @@ standby 100 priority 110
 standby 100 preempt
 end
 ```
-
-* « Standby » est la commande qui permet la configuration du HSRP.
-* « 10 » est le numéro du groupe HSRP dont fait partie l’interface.
-*Note: Un routeur peut faire partie de plusieurs groupes HSRP*
 
 ## Vérification
 Dans la sortie de commande suivante, le routeur actif est R2 (conformément à la priorité donnée dans la configuration des interfaces).
