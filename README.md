@@ -96,3 +96,18 @@ Priority 100 (default 100)
 IP redundancy name is "hsrp-Fa0/0-100" (default)
 R1#
 ```
+
+* La commande `standby preempt` donne la priorité au routeur de protocole Cisco HSRP (Hot
+Standby Router Protocol) pour que ce dernier devienne actif immédiatement. La priorité est
+d'abord déterminée par la valeur de priorité configurée puis par l'adresse IP. Dans chaque cas,
+une valeur plus élevée a une plus priorité plus grande. Quand un routeur d'une certaine priorité
+acquiert un routeur de moins grande priorité, le routeur envoie un message « Coup ». Quand un
+routeur actif de basse priorité reçoit un message « Coup » ou un message « Hello » depuis un
+routeur actif de plus grande priorité, le statut du routeur change en « Speak » et un message
+« Resign » est envoyé.
+
+* La commande `standby track` vous permet de spécifier une autre interface sur le routeur pour
+surveiller le processus HSRP, en vue de modifier la priorité HSRP pour un groupe donné. Si le
+protocole de ligne de l'interface spécifiée échoue, la priorité HSRP est réduite. Ainsi, un autre
+routeur HSRP de priorité plus élevée peut devenir le routeur actif si standby preempt est activé.
+```
