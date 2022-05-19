@@ -16,10 +16,10 @@ La technologie HSRP permettra aux routeurs situés dans un même groupe (que l�
 * Mode Passive (Passif)<br>Les autres routeurs attendent que le routeur en mode active soit indisponible pour prendre sa place.
 
 ### Commandes HSRP
-* La commande « standby priority xxx » définit une priorité au routeur. Celui qui possédera la plus grande valeur sera élus actif. Si la configuration du routeur ne stipule pas la priorité, alors la valeurs par défaut de 100 sera appliquée.
-* La commande « standby track xxxxxx » permet de superviser une interface et de baisser de 10 la valeur de la priorité HSRP si elle devenait Down.
-* La commande « standby ip xxx.xxx.xxx.xxx » indique l’adresse IP virtuelle partagée entre les deux routeurs.
-* La commande « standby authentication« , permet de remplacer le mot de passe par défaut « Cisco    » (63 69 73 63 6F 00 00 00).
+* La commande `standby priority xxx ` définit une priorité au routeur. Celui qui possédera la plus grande valeur sera élus actif. Si la configuration du routeur ne stipule pas la priorité, alors la valeurs par défaut de 100 sera appliquée.
+* La commande `standby track xxxxxx ` permet de superviser une interface et de baisser de 10 la valeur de la priorité HSRP si elle devenait Down.
+* La commande `standby ip xxx.xxx.xxx.xxx ` indique l’adresse IP virtuelle partagée entre les deux routeurs.
+* La commande `standby authentication` , permet de remplacer le mot de passe par défaut « Cisco    » (63 69 73 63 6F 00 00 00).
 
 ## Versions HSRP
 
@@ -28,6 +28,7 @@ La technologie HSRP permettra aux routeurs situés dans un même groupe (que l�
 * Adresse MAC utilisée : 0000.0C07.ACxx
 * Utilise l’adresse multicast 224.0.0.2
 * Groupe 0 au groupe 255
+
 ### HSRP VERSION 2
 * IPv4 / IPv6
 * Adresse MAC utilisée : 0000.0C9F.Fxxx
