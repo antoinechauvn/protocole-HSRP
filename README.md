@@ -3,10 +3,35 @@ Découverte du protocole HSRP
 
 
 Hot Standby Router Protocol (HSRP) est un protocole propriétaire de Cisco implémenté sur les routeurs et les commutateurs de niveau 3 permettant une continuité de service. HSRP est principalement utilisé pour assurer la disponibilité de la passerelle par défaut dans un sous-réseau en dépit d'une panne d'un routeur.
+HSRP, Host Standby Router Protocol est un protocole de redondance du premier saut (FHRP, First Hop redundancy Protocols)
 
 # Principe de Fonctionnement
 ![image](https://user-images.githubusercontent.com/83721477/168839422-d194d263-ac80-45b6-ac99-1b6e8ac34a3b.png)
-* L'adresse IP de la passerelle est configurée sur deux routeurs différents. Une seule de ces deux interfaces est active. Si l'interface active n'est plus accessible, l'interface passive devient active.
+La technologie HSRP permettra aux routeurs situés dans un même groupe (que l’on nomme « standby group ») de former un routeur virtuel qui sera l’unique passerelle des hôtes du réseau local.
+
+# Election des routeurs HSRP
+* Le routeur qui aura la plus haute priorité (ou « priority ») sera le routeur primaire ou principal du groupe HSRP.
+* Si égalité (100 par défaut), c’est le routeur qui aura l’IP la plus haute qui sera désigné comme routeur primaire.
+
+Le ou les routeurs en mode Passive se tiendront informés de l’état de santé du routeur Active via des paquets “Hello” envoyés en mulitcast.
+
+
+* Le routeur en mode `Active` envoi des paquets “Hello” aux routeurs en mode Passive.
+
+Cet intervalle de temps s’appelle :
+
+“Hello Timer” (par défaut: toutes les 3 secondes)
+Si nos routeurs en mode Passive ne reçoivent plus de paquets “Hello”, ils considèrent que le routeur en mode Active est hors service, il va donc y avoir une nouvelle élection !
+
+Cet intervalle de temps s’appelle :
+
+“Hold-time Timer” (par défaut: 10 secondes soit 3x le Hello Timer)
+Les valeurs “Hello Timer” et “Hold-time Timer” peuvent être changées administrativement.
+
+Si notre routeur en mode Active n’est plus en état de fonctionner, une nouvelle élection à lieu.
+Un routeur en mode Passive va donc passer en mode Active.
+
+La commande “preempt” va permettre à un routeur possédant une priorité supérieure aux autres de remplacer le routeur actuellement en mode Active (sans attendre la prochaine élection, #CoupD’état)
 
 ### Configuration de R1
 ```
@@ -77,6 +102,10 @@ standby 100 preempt
 end
 ```
 
+* « Standby » est la commande qui permet la configuration du HSRP.
+* « 10 » est le numéro du groupe HSRP dont fait partie l’interface.
+*Note: Un routeur peut faire partie de plusieurs groupes HSRP*
+
 ## Vérification
 Dans la sortie de commande suivante, le routeur actif est R2 (conformément à la priorité donnée dans la configuration des interfaces).
 ```
@@ -96,6 +125,23 @@ Priority 100 (default 100)
 IP redundancy name is "hsrp-Fa0/0-100" (default)
 R1#
 ```
+
+## Versions HSRP
+
+### HSRP VERSION 1
+IPv4
+Adresse MAC utilisée : 0000.0C07.ACxx
+Utilise l’adresse multicast 224.0.0.2
+Groupe 0 au groupe 255
+### HSRP VERSION 2
+IPv4 / IPv6
+Adresse MAC utilisée : 0000.0C9F.Fxxx
+Utilise l’adresse multicast 224.0.0.102
+Groupe 0 au groupe 4095
+
+## Modes HSRP
+* Mode Active (Actif)<br>Ce routeur portera l’adresse IP et l’adresse MAC virtuelle
+* Mode Passive (Passif)<br>Les autres routeurs attendent que le routeur en mode active soit indisponible pour prendre sa place.
 
 
 La commande « standby priority xxx » définit une priorité au routeur. Celui qui possédera la plus grande valeur sera élus actif. Si la configuration du routeur ne stipule pas la priorité, alors la valeurs par défaut de 100 sera appliquée.
